@@ -20,7 +20,7 @@ namespace FeatureToggle.Filter
 
             if (configCatClient != null)
             {
-                configCatClient.ForceRefresh();
+               // configCatClient.ForceRefresh();
 
                 if (!configCatClient.GetValue(_toggleName, false))
                  context.Result = new NotFoundResult();
