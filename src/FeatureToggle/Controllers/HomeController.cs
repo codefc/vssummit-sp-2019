@@ -40,10 +40,15 @@ namespace FeatureToggle.Controllers
         [HttpPost]
         public async Task<IActionResult> FindRepositories(string name)
         {
-            ViewBag.Repositories = await _service.GetRepositories(name);
+            ViewBag.Env = _environment.EnvironmentName;
 
-            ViewBag.PesquisarRepo = _client.GetValue(ApplicationConstants.FeatureToggle.PESQUISAR_REPOSITORIOS, false);
+            if (_client.GetValue(ApplicationConstants.FeatureToggle.PESQUISAR_REPOSITORIOS, false))
+            {
+                ViewBag.Repositories = await _service.GetRepositories(name);
 
+                ViewBag.PesquisarRepo = _client.GetValue(ApplicationConstants.FeatureToggle.PESQUISAR_REPOSITORIOS, false);
+            }
+             
             return View("Index");
         }
 
